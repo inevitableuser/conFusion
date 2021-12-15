@@ -1,0 +1,15 @@
+npm install @angular/material --save
+npm install @angular/cdk --save
+npm install --save @angular/animations
+npm install --save hammerjs
+
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+npm install --save @angular/flex-layout
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
