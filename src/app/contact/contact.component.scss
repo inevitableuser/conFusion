@@ -1,0 +1,41 @@
+.full-width{
+    width:95%;
+}
+
+.half-width{
+    width:45%;
+}
+
+.form-size{
+    width:75%
+    
+}
+
+// ::ng-deep .mat-select-value-text {            //this will also work same as .mat-select-value
+//     // select
+//     color:black;
+//   }
+
+// ::ng-deep .mat-select-value{        //for dropdown text color
+//         // select
+//         color:black;
+//       }
+
+
+// ::ng-deep .mat-option{       // for options placeholder color
+//         // select
+//         color:red;
+//       }
+
+
+// ::ng-deep .mat-form-field-label{
+//     color:#512DA8 !important;
+// }
+
+// ::ng-deep .mat-form-field-underline{   background-color: darkgrey !important; } 
+
+// ::ng-deep.mat-form-field-ripple {   background-color: greenyellow !important;;  }
+
+// ::ng-deep .mat-form-field-outline {
+//     background-color: red !important;
+//  } 

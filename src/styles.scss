@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/purple-green';
+@import '~@angular/material/prebuilt-themes/indigo-pink';
 
 @import '../node_modules/font-awesome/scss/font-awesome';
 // some basic resets 
@@ -15,6 +15,7 @@ body {
   margin:20;
   display: flex;
 }
+
 
 
 
@@ -35,6 +36,7 @@ $divider-color:        #BDBDBD;
     margin: 0px auto;
     padding: $pad-up-down $pad-left-right;
 }
+
 
 .background-primary {
     background-color: $background-dark!important;
