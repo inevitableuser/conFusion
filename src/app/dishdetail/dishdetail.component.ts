@@ -12,6 +12,9 @@ import { DishService } from '../services/dish.service';
 export class DishdetailComponent implements OnInit {
   // @Input()
   dish: Dish;
+  dishIds: string[];
+  prev: string;
+  next: string;
 
   constructor(private dishService: DishService, private route: ActivatedRoute, private location: Location) { }
 
