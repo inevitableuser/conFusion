@@ -68,6 +68,12 @@
                     <p matLine class="text">{{leader.description}}</p>
                 </mat-list-item>
             </mat-list>
+
+
+            <div fxFlex [hidden]="Leaders">
+                <mat-spinner></mat-spinner>
+                <h4>Loading... please wait</h4>
+            </div>
         </div>
 
 
