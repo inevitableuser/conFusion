@@ -87,3 +87,7 @@ import { baseURL } from './shared/baseurl';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+// json-serve --watch db.json -d 2000
+// ng serve
