@@ -6,15 +6,26 @@ import { Location } from '@angular/common';
 import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs';
 import { Comment } from '../shared/comment';
+import { visibility, flyInOut, expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display:block;'
+  },
+  animations: [
+    flyInOut(),
+    visibility(),
+    expand()
+  ]
 })
 export class DishdetailComponent implements OnInit {
   // @Input()
   dish: Dish;
+  dishCopy: Dish;
   dishIds: string[];
   prev: string;
   next: string;
@@ -23,6 +34,8 @@ export class DishdetailComponent implements OnInit {
   commentForm: FormGroup;
 
   errMsg: string;
+
+  visibility = 'shown';
 
   @ViewChild("fform") commentFormDirective: NgForm;
 
@@ -55,8 +68,8 @@ export class DishdetailComponent implements OnInit {
     this.dishService.getDishIds()
       .subscribe((dishIds) => this.dishIds = dishIds);
 
-    this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-      .subscribe((dish) => { this.dish = dish; this.setPrevNext(dish.id) },
+    this.route.params.pipe(switchMap((params: Params) => { this.visibility = 'hidden'; return this.dishService.getDish(params['id']); }))
+      .subscribe((dish) => { this.dish = dish; this.dishCopy = dish; this.setPrevNext(dish.id); this.visibility = 'shown'; },
         errMsg => this.errMsg = <any>errMsg);
 
     // let id = this.route.snapshot.params['id'];
@@ -116,7 +129,9 @@ export class DishdetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     const d = new Date();
     this.comment.date = d.toISOString();
-    this.dish.comments.push(this.comment);
+    this.dishCopy.comments.push(this.comment);
+    this.dishService.putDish(this.dishCopy)
+      .subscribe(dish => { this.dish = dish; this.dishCopy = dish; }, errMsg => { this.errMsg = <any>errMsg; });
     console.log(this.comment);
     this.commentForm.reset(
       {

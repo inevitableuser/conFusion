@@ -4,9 +4,10 @@ import { Observable, of } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { map, catchError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class DishService {
   }
 
   getFeatureDish(): Observable<Dish> {
-    return this.http.get<Dish[]>(baseURL + 'dishees?featured=true')
+    return this.http.get<Dish[]>(baseURL + 'dishes?featured=true')
       .pipe(map(dishes => dishes[0]))
       .pipe(catchError(this.processHTTPMsgService.handleError));;
   }
@@ -35,5 +36,16 @@ export class DishService {
     return this.getDishes()
       .pipe(map(dishes => dishes.map(dish => dish.id)))
       .pipe(catchError(error => error));
+  }
+
+  putDish(dish: Dish): Observable<Dish> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+
+    return this.http.put<Dish>(baseURL + 'dishes/' + dish.id, dish, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 }
