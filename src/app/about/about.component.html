@@ -62,7 +62,7 @@
         <div>
             <mat-list>
                 <mat-list-item *ngFor="let leader of Leaders">
-                    <img matListAvatar src={{leader.image}} alt={{leader.name}} />
+                    <img matListAvatar src="{{BaseURL+leader.image}}" alt={{leader.name}} />
                     <h1 matLine class="text"> {{leader.name}} {{leader.abbr | uppercase}}</h1>
                     <p matLine class="text">{{leader.designation}}</p>
                     <p matLine class="text">{{leader.description}}</p>
@@ -70,9 +70,13 @@
             </mat-list>
 
 
-            <div fxFlex [hidden]="Leaders">
+            <div fxFlex [hidden]="Leaders || errMsg">
                 <mat-spinner></mat-spinner>
                 <h4>Loading... please wait</h4>
+            </div>
+            <div *ngIf="errMsg">
+                <h2>Error</h2>
+                <h4>{{errMsg}}</h4>
             </div>
         </div>
 
